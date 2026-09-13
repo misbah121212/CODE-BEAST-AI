@@ -11,7 +11,7 @@ function makeDistortionCurve(amount = 20): Float32Array {
     const x = (i * 2) / n_samples - 1;
     curve[i] = ((3 + amount) * x * 20 * deg) / (Math.PI + amount * Math.abs(x));
   }
-  return curve;
+  return curve as any;
 }
 
 function makeBrownNoise(ctx: AudioContext, seconds: number): AudioBuffer {
@@ -162,7 +162,7 @@ export function useBeastIntroAudio() {
 
     // Warm harmonic distortion for visceral beast throat texture
     const waveShaper = track(ctx.createWaveShaper());
-    waveShaper.curve = makeDistortionCurve(20);
+    waveShaper.curve = makeDistortionCurve(20) as any;
     waveShaper.oversample = "2x";
 
     // Beast Oscillator 1: Guttural Sawtooth, dropping in pitch (56Hz -> 38Hz)
