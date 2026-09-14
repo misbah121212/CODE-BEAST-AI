@@ -8,7 +8,7 @@ import { BeastIntroOverlay } from "@/components/BeastIntroOverlay";
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {
   const [showIntro, setShowIntro] = useState(false);
-  const [isIntroActive, setIsIntroActive] = useState(true);
+  const [isIntroActive, setIsIntroActive] = useState(false);
 
   useEffect(() => {
     // Enforce dark mode: reset any document CSS filter inversion
@@ -26,15 +26,20 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen w-full flex flex-col bg-[#0D0704] text-[#D4BC9A] relative font-sans selection:bg-amber-500/30 overflow-x-hidden">
-      {/* 1. Volumetric Atmospheric 3D Canvas Background (Preserved 100% Untouched) */}
+      {/* 1. Volumetric Atmospheric 3D Canvas Background */}
       <AtmosphericBackground3D />
 
-      {/* 2. Cinematic 5-Phase Beast Scratch Intro Overlay */}
-      <BeastIntroOverlay
-        forceRun={showIntro}
-        onStartDissolve={handleStartDissolve}
-        onComplete={() => setIsIntroActive(false)}
-      />
+      {/* 2. Cinematic 5-Phase Beast Scratch Intro Overlay (Triggered via Replay Intro button) */}
+      {showIntro && (
+        <BeastIntroOverlay
+          forceRun={showIntro}
+          onStartDissolve={handleStartDissolve}
+          onComplete={() => {
+            setIsIntroActive(false);
+            setShowIntro(false);
+          }}
+        />
+      )}
 
       {/* 3. Main Full-Width Website Wrapper with Seamless Cinematic Crossfade Entrance */}
       <motion.div
