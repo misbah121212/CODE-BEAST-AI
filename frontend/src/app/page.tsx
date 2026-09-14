@@ -15,6 +15,7 @@ import {
   GitBranch,
   Sparkles
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { CountUp } from '@/components/CountUp';
 import { TiltCard } from '@/components/TiltCard';
 import { CodeBeastLiquidButton } from '@/components/ui/codebeast-liquid-button';
@@ -22,6 +23,7 @@ import { CodeBeastCube3D } from '@/components/CodeBeastCube3D';
 import { NeuralMesh3D } from '@/components/NeuralMesh3D';
 
 export default function HomePage() {
+  const router = useRouter();
   const [repoUrl, setRepoUrl] = useState('github.com/your-org/your-repo');
 
   const partners = [
@@ -162,7 +164,7 @@ export default function HomePage() {
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
                         const target = repoUrl.trim() || 'https://github.com/pallets/flask';
-                        window.location.href = `/analysis?repo=${encodeURIComponent(target)}`;
+                        router.push(`/analysis?repo=${encodeURIComponent(target)}`);
                       }
                     }}
                     placeholder="github.com/your-org/your-repo"
