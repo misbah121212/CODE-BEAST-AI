@@ -44,7 +44,7 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
       {/* 3. Main Full-Width Website Wrapper with Seamless Cinematic Crossfade Entrance */}
       <motion.div
         className="min-h-screen w-full flex flex-col relative z-10"
-        initial={{ opacity: 0, y: 12, scale: 0.99 }}
+        initial={{ opacity: 1, y: 0, scale: 1.0 }}
         animate={{
           opacity: isIntroActive ? 0 : 1,
           y: isIntroActive ? 12 : 0,
